@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './App.css';
 import { Component } from 'react';
 import { CardList } from './components/card-list/card-list.component';
 import { SearchBox } from './components/searchbox/search-box.component';
@@ -14,6 +14,10 @@ class App extends Component {
 		};
 	}
 
+	onSearchChange = (e) => {
+		this.setState({ searchField: e.target.value });
+	};
+
 	componentDidMount() {
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then((response) => response.json())
@@ -26,10 +30,8 @@ class App extends Component {
 		);
 		return (
 			<div className="App">
-				<SearchBox
-					placeholder="search monsters"
-					handleChage={(e) => this.setState({ searchField: e.target.value })}
-				/>
+				<h1>Monsters Roledex</h1>
+				<SearchBox onSearchChange={this.onSearchChange} />
 				<CardList monsters={filteredMonsters} />
 			</div>
 		);
